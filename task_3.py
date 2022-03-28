@@ -6,9 +6,12 @@ import shutil
 
 
 logger.add ('logs.log', format = '{time} {level} {message}', level = 'DEBUG')
-dir_path = 'directory'
-shutil.rmtree(dir_path)
-logger.info ('delete old directory')
+try:
+    dir_path = 'directory'
+    shutil.rmtree(dir_path)
+    logger.info ('delete old directory')
+except FileNotFoundError:
+    logger.debug ('папка \'directory\' не существует, удалять нечего')
 Path ('directory').mkdir (exist_ok = True)
 for i in range (15):
     Path ( f'directory/'
